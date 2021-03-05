@@ -1,0 +1,6 @@
+Startup folder: $(ProjectDir)../../data
+
+Dynamic link library config in Visual Studio
+Property Pages -> Debugging -> Environment
+
+PATH=$(ProjectDir)\..\..\3rdparty\freeglut\bin\x64;%PATH%$(LocalDebuggerEnvironment)

@@ -1,0 +1,41 @@
+# - Find FreeGLUT
+# Find the native FreeGLUT headers and libraries.
+#
+#  FREEGLUT_INCLUDE_DIRS - where to find freeglut.h, etc.
+#  FREEGLUT_LIBRARIES    - List of libraries when using FreeGLUT.
+#  FREEGLUT_FOUND        - True if FreeGLUT found.
+
+# Locate freeglut dir
+SET(FREEGLUT_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}")
+
+# Look for the header file.
+SET(FREEGLUT_INCLUDE_DIR "${FREEGLUT_ROOT_DIR}/include")
+
+# Look for the library.
+IF (CMAKE_CL_64)
+	SET(FREEGLUT_LIBRARY "${FREEGLUT_ROOT_DIR}/lib/x64/freeglut.lib")
+ELSE (CMAKE_CL_64)
+	SET(FREEGLUT_LIBRARY "${FREEGLUT_ROOT_DIR}/lib/freeglut.lib")
+ENDIF (CMAKE_CL_64)
+
+# Handle the QUIETLY and REQUIRED arguments and set FREEGLUT_FOUND to TRUE if all listed variables are TRUE.
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(
+	freeglut DEFAULT_MSG
+	FREEGLUT_ROOT_DIR
+	FREEGLUT_LIBRARY
+	FREEGLUT_INCLUDE_DIR)
+
+# Copy the results to the output variables.
+IF (FREEGLUT_FOUND)
+	SET(FREEGLUT_LIBRARIES ${FREEGLUT_LIBRARY})
+	SET(FREEGLUT_INCLUDE_DIRS ${FREEGLUT_INCLUDE_DIR})
+ELSE (FREEGLUT_FOUND)
+	SET(FREEGLUT_LIBRARIES)
+	SET(FREEGLUT_INCLUDE_DIRS)
+ENDIF (FREEGLUT_FOUND)
+
+#message("FREEGLUT_INCLUDE_DIRS = ${FREEGLUT_INCLUDE_DIRS}")
+#message("FREEGLUT_LIBRARIES = ${FREEGLUT_LIBRARIES}")
+
+MARK_AS_ADVANCED(FREEGLUT_INCLUDE_DIRS FREEGLUT_LIBRARIES)
